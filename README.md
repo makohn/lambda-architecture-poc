@@ -1,6 +1,8 @@
 # lambda-architecture-poc
 A PoC implementation of the **λ**-Architecture for collecting and analysing tweets
 
+[![Build Status](https://travis-ci.com/makohn/lambda-architecture-poc.svg?token=z1kyyNNo3nk7k9bTgxPq&branch=master)](https://travis-ci.com/makohn/lambda-architecture-poc)
+
 # Prerequisites
 
 * Apache Spark 
