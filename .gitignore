@@ -1,0 +1,26 @@
+# Binaries
+
+build/
+project/boot/
+project/plugins/project/
+project/plugins/target/
+project/target/
+target/
+project/boot/*
+project/plugins/project/*
+project/plugins/target/*
+project/target/*
+target/*
+
+# IDE
+.idea
+.idea/*
+.classpath
+.project
+.target/
+.cache
+logs/*
+.settings/
+
+# Misc
+checkpointDir/
