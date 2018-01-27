@@ -1,10 +1,15 @@
 package de.htwsaar.twitter
 
 import de.htwsaar.util.Configuration
+import net.liftweb.json.{DefaultFormats, Serialization}
 import twitter4j._
 import twitter4j.conf.ConfigurationBuilder
 
-object TwitterStreamFetcher extends App {
+object TwitterStreamFetcher extends App  {
+
+  // Serialize tweet to JSON
+  implicit protected val formats = DefaultFormats
+  private def write[T <: AnyRef](value: T): String = Serialization.write(value)
 
   val cb = new ConfigurationBuilder()
   cb.setDebugEnabled(true)
@@ -18,7 +23,11 @@ object TwitterStreamFetcher extends App {
   twitterStream.addListener(new StatusListener {
 
     override def onStatus(status: Status): Unit = {
-      println(status.getText)
+      val message = new Tweet(status.getId,
+        status.getCreatedAt.getTime,
+        status.getUser.getName,
+        status.getPlace.getCountry)
+      TwitterKafkaProducer.send("tweets", write(message))
     }
 
     override def onDeletionNotice(statusDeletionNotice: StatusDeletionNotice): Unit = {}
