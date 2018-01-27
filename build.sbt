@@ -3,7 +3,8 @@ val sparkStreaming =          "org.apache.spark" %% "spark-streaming" % "2.0.0"
 val sparkStreamingKafka =     "org.apache.spark" %% "spark-streaming-kafka-0-8" % "2.0.0"
 val sparkSql =                "org.apache.spark" %% "spark-sql" % "2.0.0"
 val kafka =                   "org.apache.kafka" %% "kafka" % "0.8.2.1"
-val twitter =                 "org.apache.bahir" %% "spark-streaming-twitter" % "2.0.1"
+val twitter4j =               "org.twitter4j" % "twitter4j-stream" % "4.0.4"
+val akkaHttp =                "com.typesafe.akka" %% "akka-http-experimental" % "2.4.11"
 
   
 
@@ -24,6 +25,7 @@ lazy val root = (project in file("."))
 			sparkStreamingKafka,
 			sparkSql,
 			kafka,
-      twitter
+      twitter4j,
+      akkaHttp
 		)	
 	)
