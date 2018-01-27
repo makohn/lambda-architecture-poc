@@ -1,3 +1,6 @@
+# OS (should be in global .gitignore)
+.DS_Store
+
 # Binaries
 
 build/
