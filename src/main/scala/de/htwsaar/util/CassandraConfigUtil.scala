@@ -3,6 +3,9 @@ package de.htwsaar.util
 import com.typesafe.config.ConfigFactory
 import scala.collection.JavaConversions._
 
+/**
+  * Reads cassandra configuration parameters from config file.
+  */
 object CassandraConfigUtil {
 
   val config = ConfigFactory.load()

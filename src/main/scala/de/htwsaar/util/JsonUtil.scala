@@ -3,6 +3,9 @@ package de.htwsaar.util
 import net.liftweb.json.JsonAST.JNothing
 import net.liftweb.json.{DefaultFormats, JValue, Serialization, parse => liftParser}
 
+/**
+  * Serializing scala objects to json format.
+  */
 trait JsonUtil {
   implicit protected val formats = DefaultFormats
 

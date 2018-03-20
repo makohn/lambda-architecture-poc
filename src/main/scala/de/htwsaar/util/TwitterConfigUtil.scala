@@ -2,6 +2,9 @@ package de.htwsaar.util
 
 import com.typesafe.config.ConfigFactory
 
+/**
+  * Reads twitter4j configuration from config file
+  */
 object TwitterConfigUtil {
 
   val config = ConfigFactory.load()

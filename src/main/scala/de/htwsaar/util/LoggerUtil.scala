@@ -2,6 +2,9 @@ package de.htwsaar.util
 
 import org.slf4j.{ Logger, LoggerFactory }
 
+/**
+  * Helps logging information and errors
+  */
 trait LoggerUtil {
 
   val logger: Logger = LoggerFactory.getLogger(this.getClass())

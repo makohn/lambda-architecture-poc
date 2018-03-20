@@ -4,7 +4,13 @@ import com.datastax.spark.connector._
 import org.apache.spark.{SparkConf, SparkContext}
 import org.fusesource.jansi.Ansi.Color._
 import org.fusesource.jansi.Ansi._
+import org.apache.hadoop.mapreduce.Job
+import org.apache.hadoop.mapreduce.Mapper
+import org.apache.hadoop.mapreduce.Reducer
 
+/**
+  * Responsible for calculating batch views.
+  */
 class BatchJob {
 
   val sparkConf = new SparkConf()
@@ -14,11 +20,14 @@ class BatchJob {
 
   val sc = new SparkContext(sparkConf)
 
+  /**
+    * Start calculating top hashtags on master dataset using MapReduce algorithm.
+    */
   def start: Unit ={
     val now = System.currentTimeMillis()
     println(ansi().fg(GREEN).a(now).reset())
-    val rdd = sc.cassandraTable("master_dataset", "hashtags")
-    val hashtags = rdd.select("hashtag")
+    val data = sc.cassandraTable("master_dataset", "hashtags")
+    val hashtags = data.select("hashtag")
     val hashtagCounts = hashtags
           .map( row => row.columnValues(0)) // Get the raw hashtag value from the row
           .map( k => (k,1))                 // Assign a count to each hashtag
