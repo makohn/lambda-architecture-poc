@@ -27,4 +27,4 @@ logs/*
 
 # Misc
 checkpointDir/
-application.conf
+# application.conf

@@ -5,20 +5,30 @@ import java.util.Properties
 import de.htwsaar.util.Constants
 import kafka.consumer.{Consumer, ConsumerConfig, ConsumerIterator, ConsumerTimeoutException}
 
+/**
+  * Initializes a Kafka consumer instance.
+  */
 class KafkaConsumer {
 
   private val properties = new Properties
+  // assign this entity to a consumer group
   properties.put("group.id", "batch_consumer")
+  // bind instance to zookeeper (configuration server)
   properties.put("zookeeper.connect", "localhost:2181")
+  // enable auto commit
   properties.put("enable.auto.commit", "true")
   properties.put("auto.offset.reset", "smallest")
+  // define timeout
   properties.put("consumer.timeout.ms", "500")
+  // define auto commit interval
   properties.put("auto.commit.interval.ms", "1000")
+  // serializer class for key
   properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
+  // serializer class for value
   properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
 
   private val numberStreams= 1 // How many streams for topic
-  private val batchSize = 100
+  private val batchSize = 100 // Size of batch to process at a time
   private val topic = Constants.topic
   private val consumerConnector = Consumer.create(new ConsumerConfig(properties))
 
@@ -68,10 +78,10 @@ class KafkaConsumer {
       it.hasNext()
     catch {
       case timeOutEx: ConsumerTimeoutException =>
-        println("Getting time out  when reading message :::::::::::::: ")
+        println("Getting time out  when reading message.")
         false
       case ex: Exception =>
-        println("Getting error when reading message :::::::::::::::::  ", ex)
+        println("Getting error when reading message.", ex)
         false
     }
 }

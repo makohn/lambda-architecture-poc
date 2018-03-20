@@ -12,7 +12,7 @@ trait CassandraConnection {
 
   val defaultConsistencyLevel = ConsistencyLevel.valueOf(writeConsistency)
 
-  // Create master dataset
+  // Create master dataset (keyspace)
  val cassandraConn: Session = {
     val cluster = new Cluster.Builder().withClusterName(Constants.cassandraCluster).
       addContactPoints(hosts.toArray: _*).
@@ -31,7 +31,7 @@ trait CassandraConnection {
     session
   }
 
-  // Create batchview dataset
+  // Create batchview dataset (keyspace)
   val cassandraConn1: Session = {
     val cluster = new Cluster.Builder().withClusterName(Constants.cassandraCluster).
       addContactPoints(hosts.toArray: _*).
@@ -51,7 +51,7 @@ trait CassandraConnection {
     session
   }
 
-  // Create realtime dataset
+  // Create realtime dataset (keyspace)
   val cassandraConn2: Session = {
     val cluster = new Cluster.Builder().withClusterName(Constants.cassandraCluster).
       addContactPoints(hosts.toArray: _*).

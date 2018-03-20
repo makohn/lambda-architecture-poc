@@ -20,12 +20,13 @@ object SparkStreamingKafkaConsumer extends App {
     .set("spark.cassandra.connection.host", "127.0.0.1")
     .set("spark.cassandra.auth.username", "cassandra")
   val ssc = new StreamingContext(sparkConf, Seconds(20)) // Perform real-time calculation every 20 seconds
-  ssc.checkpoint("checkpointDir")
+  ssc.checkpoint("checkpointDir")  // truncating RDD lineage graph and saving it to local filesystem (backup)
 
-  val topicsSet = Set(Constants.topic)
+  val topicsSet = Set(Constants.topic) // Subscribe to specified Kafka topic ('hashtags')
   val kafkaParams = Map[String, String]("metadata.broker.list" -> brokers, "group.id" -> "spark_streaming")
   val messages: InputDStream[(String, String)] = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topicsSet)
 
+  // Initialize a DStream comprising RDDs of hashtags
   val tweets: DStream[String] = messages.map { case (key, message) => message }
   ViewHandler.createAllView(ssc.sparkContext, tweets)
   ssc.start()

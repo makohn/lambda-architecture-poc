@@ -25,7 +25,7 @@ class CassandraConsumer(consumer: KafkaConsumer) extends Actor {
 }
 
 /**
-  * Access the CassandraKafkaConsumer as a Main Application.
+  * Entry point for the CassandraKafkaConsumer .
   */
 object CassandraKafkaConsumer extends App {
 
