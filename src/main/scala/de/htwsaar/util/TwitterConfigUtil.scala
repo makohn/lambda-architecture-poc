@@ -2,7 +2,7 @@ package de.htwsaar.util
 
 import com.typesafe.config.ConfigFactory
 
-object Configuration {
+object TwitterConfigUtil {
 
   val config = ConfigFactory.load()
 
